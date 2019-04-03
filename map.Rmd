@@ -1,0 +1,44 @@
+---
+title: "Untitled"
+author: "Miae Park"
+date: "April 1, 2019"
+output:
+  html_document: default
+  word_document: default
+---
+
+```{r setup, include=FALSE}
+chooseCRANmirror(graphics=FALSE, ind=1)
+knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+library(leaflet)
+library(dplyr)
+library(lmtest)
+library(forecast)
+install.packages("magrittr") # only needed the first time you use it
+install.packages("dplyr")    # alternative installation of the %>%
+library(magrittr) # need to run every time you start R and want to use %>%
+library(dplyr)    # alternative, this also loads %>%
+
+leaflet() %>%
+  addTiles() %>% 
+  addMarkers(lat=28.6129, lng=77.2295, popup="India Gate, Delhi") %>%
+  addMarkers(lat=28.5244,lng=77.1855, popup="Qutb Minar, Delhi") %>%
+  addMarkers(lat=28.6562,lng=77.2410, popup="Red Fort, Delhi") %>%
+  addMarkers(lat=28.5933,lng=77.2507, popup="Humayun's Tomb, Delhi") %>%
+  addMarkers(lat=28.6264,lng=77.2089, popup="Gurudwara Bangla Sahib, Delhi") %>%
+  addMarkers(lat=28.6127,lng=77.2773, popup="Akshardham, Delhi")
+  
+```
+
+```{r setup, include=FALSE}
+chooseCRANmirror(graphics=FALSE, ind=1)
+knitr::opts_chunk$set(echo = TRUE)
+df <- data.frame(lat=runif(500, min=28.65, max = 28.75 ),
+                 lng=runif(500, min=77.05, max = 77.15 )) 
+
+df %>%
+leaflet() %>%
+addTiles() %>%
+addMarkers(clusterOptions = markerClusterOptions())
+```
